@@ -56,15 +56,16 @@ while True:
     opcao = input(menu)
 
     if opcao == "d":
-        saldo, extrato = deposito(extrato)
-        extrato += extrato
+        novo_valor, novo_extrato = deposito(extrato)
+        saldo += novo_valor
+        extrato += novo_extrato
 
     elif opcao == "s":
         sacar(saldo, limite, numero_saques)
 
     elif opcao == "e":
         print("\n================ EXTRATO ================")
-        print("Não foram realizadas movimentações.")
+        print("Não foram realizadas movimentações." + extrato)
         print(f"\nSaldo: R$ {saldo:.2f}")
         print("==========================================")
 
