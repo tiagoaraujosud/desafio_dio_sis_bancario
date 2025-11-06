@@ -13,19 +13,23 @@ extrato = ""
 numero_saques = 0
 LIMITE_SAQUES = 3
 
-while True:
+def deposito():
 
+    valor = float(input("Informe o valor do depósito: "))
+    
+    if valor > 0:
+        print(f"Depósito: R$ {valor:.2f}\n")
+        print("Depósito realizado!")
+        return valor
+    else:
+        print("Operação falhou! O valor informado é inválido.")
+
+while True:
+    
     opcao = input(menu)
 
     if opcao == "d":
-        valor = float(input("Informe o valor do depósito: "))
-
-        if valor > 0:
-            saldo += valor
-            extrato += f"Depósito: R$ {valor:.2f}\n"
-
-        else:
-            print("Operação falhou! O valor informado é inválido.")
+        saldo += deposito()
 
     elif opcao == "s":
         valor = float(input("Informe o valor do saque: "))
