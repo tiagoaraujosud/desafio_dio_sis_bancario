@@ -24,7 +24,7 @@ def deposito(extrato):
     else:
         print("Operação falhou! O valor informado é inválido.")
 
-def sacar(saldo, limite, numero_saques):
+def sacar(saldo, limite, numero_saques, extrato):
     valor = float(input("Informe o valor do saque: "))
     
     excedeu_saldo = valor > saldo
@@ -46,11 +46,14 @@ def sacar(saldo, limite, numero_saques):
         saldo -= valor
         extrato += f"Saque: R$ {valor:.2f}\n"
         numero_saques += 1
-
+        print("Saque realizado com sucesso!")
+        
     else:
         print("Operação falhou! O valor informado é inválido.")
 
-def imprime_extrato(extrato, saldo):
+    return saldo, limite, numero_saques, extrato
+
+def imprime_extrato(extrato, /, saldo):
     print("\n================ EXTRATO ================")
     if extrato == "":
         print("Não foram realizadas movimentações.\n" + extrato)
@@ -69,10 +72,13 @@ while True:
         extrato = novo_extrato
 
     elif opcao == "s":
-        sacar(saldo, limite, numero_saques)
+        novo_saldo, conta_saques, novo_extrato = sacar(saldo=saldo, limite=limite, numero_saques=numero_saques, extrato=extrato)
+        saldo = novo_saldo
+        numero_saques = conta_saques
+        extrato = novo_extrato
 
     elif opcao == "e":
-        imprime_extrato(extrato, saldo)
+        imprime_extrato(extrato, saldo=saldo)
 
     elif opcao == "q":
         break
