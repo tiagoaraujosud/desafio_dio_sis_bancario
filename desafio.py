@@ -1,8 +1,16 @@
-menu = """
+menu_conta = """
 
 [d] Depositar
 [s] Sacar
 [e] Extrato
+[q] Sair
+
+=> """
+
+menu_cliente = """
+
+[a] Acessar Conta
+[c] Criar Conta
 [q] Sair
 
 => """
@@ -12,6 +20,9 @@ limite = 500
 extrato = ""
 numero_saques = 0
 LIMITE_SAQUES = 3
+
+clientes = {}
+contas = {}
 
 def deposito(extrato):
 
@@ -62,9 +73,31 @@ def imprime_extrato(extrato, /, saldo):
     print(f"\nSaldo: R$ {saldo:.2f}")
     print("==========================================")
 
+def criar_cliente():
+    nome = str(input("Nome: "))
+    data_nas = str(input("Data de Nascimento: "))
+    cpf = str(input("CPF(Somente números): "))
+    endereco = str(input("Endereço: "))
+
 while True:
     
-    opcao = input(menu)
+    opcao = input(menu_cliente)
+
+    if opcao == "a":
+        print("Acessou a conta")
+
+    elif opcao == "c":
+        print("Criou conta")
+        
+    elif opcao == "q":
+        break
+    
+    else:
+        print("Operação inválida, por favor selecione novamente a operação desejada.") 
+        
+while True:
+    
+    opcao = input(menu_conta)
 
     if opcao == "d":
         novo_valor, novo_extrato = deposito(extrato)
@@ -79,7 +112,10 @@ while True:
 
     elif opcao == "e":
         imprime_extrato(extrato, saldo=saldo)
-
+        
+    elif opcao == "c":
+        criar_cliente()
+        
     elif opcao == "q":
         break
 
