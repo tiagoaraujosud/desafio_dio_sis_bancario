@@ -22,6 +22,7 @@ numero_saques = 0
 LIMITE_SAQUES = 3
 
 clientes = {}
+cliente = []
 contas = {}
 
 def deposito(extrato):
@@ -73,51 +74,54 @@ def imprime_extrato(extrato, /, saldo):
     print(f"\nSaldo: R$ {saldo:.2f}")
     print("==========================================")
 
-def criar_cliente():
-    nome = str(input("Nome: "))
-    data_nas = str(input("Data de Nascimento: "))
-    cpf = str(input("CPF(Somente números): "))
-    endereco = str(input("Endereço: "))
+def criar_cliente(dados_cliente):
+    print("\n================ CRIAR CONTA ================")
+    print("\n================ VOCÊ ESCOLHEU A OPÇÃO DE CRIAR UMA NOVA CONTA, POR FAVOR DIGITE OS DADOS SOLICITADOS ================")
+    dados_cliente["nome"] = str(input("Nome: "))
+    dados_cliente["data_nas"] = str(input("Data de Nascimento: "))
+    dados_cliente["cpf"] = str(input("CPF(Somente números): "))
+    dados_cliente["endereco"] = str(input("Endereço: "))
+    return dados_cliente
+    
+def menu_conta():
+    while True:
+    
+        opcao = input(menu_conta)
+
+        if opcao == "d":
+            novo_valor, novo_extrato = deposito(extrato)
+            saldo += novo_valor
+            extrato = novo_extrato
+
+        elif opcao == "s":
+            novo_saldo, conta_saques, novo_extrato = sacar(saldo=saldo, limite=limite, numero_saques=numero_saques, extrato=extrato)
+            saldo = novo_saldo
+            numero_saques = conta_saques
+            extrato = novo_extrato
+
+        elif opcao == "e":
+            imprime_extrato(extrato, saldo=saldo)
+        
+        elif opcao == "q":
+            break
+
+        else:
+            print("Operação inválida, por favor selecione novamente a operação desejada.")
 
 while True:
     
     opcao = input(menu_cliente)
 
     if opcao == "a":
-        print("Acessou a conta")
+        print("Acessar a conta")
 
     elif opcao == "c":
-        print("Criou conta")
+        criar_cliente(clientes)
         
     elif opcao == "q":
         break
     
     else:
         print("Operação inválida, por favor selecione novamente a operação desejada.") 
-        
-while True:
     
-    opcao = input(menu_conta)
-
-    if opcao == "d":
-        novo_valor, novo_extrato = deposito(extrato)
-        saldo += novo_valor
-        extrato = novo_extrato
-
-    elif opcao == "s":
-        novo_saldo, conta_saques, novo_extrato = sacar(saldo=saldo, limite=limite, numero_saques=numero_saques, extrato=extrato)
-        saldo = novo_saldo
-        numero_saques = conta_saques
-        extrato = novo_extrato
-
-    elif opcao == "e":
-        imprime_extrato(extrato, saldo=saldo)
-        
-    elif opcao == "c":
-        criar_cliente()
-        
-    elif opcao == "q":
-        break
-
-    else:
-        print("Operação inválida, por favor selecione novamente a operação desejada.")
+    print(clientes)
