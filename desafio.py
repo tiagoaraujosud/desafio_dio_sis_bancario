@@ -66,22 +66,39 @@ def sacar(saldo, limite, numero_saques, extrato):
     return saldo, limite, numero_saques, extrato
 
 def imprime_extrato(extrato, /, saldo):
+    
     print("\n================ EXTRATO ================")
+    
     if extrato == "":
         print("Não foram realizadas movimentações.\n" + extrato)
+        
     else:
         print(extrato)
     print(f"\nSaldo: R$ {saldo:.2f}")
     print("==========================================")
 
-def criar_cliente(dados_cliente):
+def criar_cliente(clientes):
+    
     print("\n================ CRIAR CONTA ================")
     print("\n================ VOCÊ ESCOLHEU A OPÇÃO DE CRIAR UMA NOVA CONTA, POR FAVOR DIGITE OS DADOS SOLICITADOS ================")
-    dados_cliente["nome"] = str(input("Nome: "))
-    dados_cliente["data_nas"] = str(input("Data de Nascimento: "))
-    dados_cliente["cpf"] = str(input("CPF(Somente números): "))
-    dados_cliente["endereco"] = str(input("Endereço: "))
-    return dados_cliente
+    
+    nome = str(input("Nome: "))
+    data_nas = str(input("Data de Nascimento: "))
+    cpf = int(input("CPF(Somente números): "))
+    endereco = str(input("Endereço: "))
+    
+    if cpf in clientes:
+            print("Já existe um cliente com esse CPF.")
+            
+    else: 
+        clientes[cpf] = {
+            "nome": nome,
+            "data_nas": data_nas,
+            "endereco": endereco
+        }
+        print("Cliente criado com sucesso!")
+    
+    return clientes
     
 def menu_conta():
     while True:
@@ -116,7 +133,8 @@ while True:
         print("Acessar a conta")
 
     elif opcao == "c":
-        criar_cliente(clientes)
+        dados = criar_cliente(clientes)
+        clientes.update(dados)
         
     elif opcao == "q":
         break
