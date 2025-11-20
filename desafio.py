@@ -99,6 +99,16 @@ def criar_cliente(clientes):
         print("Cliente criado com sucesso!")
     
     return clientes
+
+def acessar_cliente(clientes):
+    
+    cpf = int(input("CPF(Somente números): "))
+    
+    if cpf in clientes:
+        return clientes[cpf]
+    
+    else:
+        print("Cliente não encontratado!")
     
 def menu_conta():
     while True:
@@ -130,7 +140,8 @@ while True:
     opcao = input(menu_cliente)
 
     if opcao == "a":
-        print("Acessar a conta")
+        dados_cliente = acessar_cliente(clientes)
+        print(dados_cliente)
 
     elif opcao == "c":
         dados = criar_cliente(clientes)
@@ -142,4 +153,3 @@ while True:
     else:
         print("Operação inválida, por favor selecione novamente a operação desejada.") 
     
-    print(clientes)
