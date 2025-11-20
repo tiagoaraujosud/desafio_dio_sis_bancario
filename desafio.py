@@ -79,13 +79,19 @@ def imprime_extrato(extrato, /, saldo):
 
 def criar_cliente(clientes):
     
+    dados_endereco = []
     print("\n================ CRIAR CONTA ================")
     print("\n================ VOCÊ ESCOLHEU A OPÇÃO DE CRIAR UMA NOVA CONTA, POR FAVOR DIGITE OS DADOS SOLICITADOS ================")
     
     nome = str(input("Nome: "))
     data_nas = str(input("Data de Nascimento: "))
     cpf = int(input("CPF(Somente números): "))
-    endereco = str(input("Endereço: "))
+    print("Endereço:")
+    rua = str(input("Rua: "))
+    num = str(input("Nº: "))
+    bairro = str(input("Bairro: "))
+    cidade = str(input("Cidade: "))
+    estado = str(input("Estado: "))
     
     if cpf in clientes:
             print("Já existe um cliente com esse CPF.")
@@ -94,7 +100,7 @@ def criar_cliente(clientes):
         clientes[cpf] = {
             "nome": nome,
             "data_nas": data_nas,
-            "endereco": endereco
+            "endereco": [rua, num, bairro, cidade, estado]
         }
         print("Cliente criado com sucesso!")
     
